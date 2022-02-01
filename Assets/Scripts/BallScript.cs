@@ -12,6 +12,8 @@ public class BallScript : MonoBehaviour
     public TextMeshProUGUI TimeValue;
     public TextMeshProUGUI WinText;
     public Button NewGame;
+    public Button NewBall;
+    public GameObject ball;
     public float timeRemaining;
     private Rigidbody rb;
     private int count;
@@ -23,9 +25,10 @@ public class BallScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
-        timeRemaining = 60;
+        timeRemaining = 6;
         NewGame.gameObject.SetActive(false);
         NewGame.onClick.AddListener(startNewGame);
+        NewBall.onClick.AddListener(resetBall);
         setCountText();
         WinText.text = "";
     }
@@ -55,16 +58,25 @@ public class BallScript : MonoBehaviour
         if(timeRemaining <= 0){
            WinText.text = "Time is up!";
            NewGame.gameObject.SetActive(true);
+           NewBall.gameObject.SetActive(false);
+           ball.gameObject.SetActive(false);
         }
     }
 
     private void startNewGame()
     {
         NewGame.gameObject.SetActive(false);
+        NewBall.gameObject.SetActive(true);
+        ball.gameObject.SetActive(true);
         WinText.text = "";
         timeRemaining = 10;
         count = 0;
         Debug.Log("new");
+    }
+
+    private void resetBall()
+    {
+        ball.transform.position = new Vector3(1.8f, 0.5f, 1.12f);
     }
 
     private void FixedUpdate()
