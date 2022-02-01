@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 public class BallScript : MonoBehaviour
 {
     public float speed = 0;
-   // public TextMeshProUGUI countText;
+    public TextMeshProUGUI ScoreValue;
    // public GameObject winTextObject;
     private Rigidbody rb;
     private int count;
@@ -32,7 +33,7 @@ public class BallScript : MonoBehaviour
 
     private void setCountText()
     {
-        //countText.text = "Count: "+ count.ToString();
+        ScoreValue.text = "Count: "+ count.ToString();
         if(count >= 13){
            // winTextObject.SetActive(true);
         }
