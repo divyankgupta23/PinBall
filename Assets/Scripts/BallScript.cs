@@ -14,6 +14,8 @@ public class BallScript : MonoBehaviour
     public Button NewGame;
     public Button NewBall;
     public GameObject ball;
+    public GameObject pickupPrefab;
+
     public float timeRemaining;
     private Rigidbody rb;
     private int count;
@@ -53,8 +55,8 @@ public class BallScript : MonoBehaviour
     private void setCountText()
     {
         ScoreValue.text = count.ToString();
-        float timeRemainingFormat = Mathf.Round(timeRemaining * 100f) / 100f;
-        TimeValue.text = "Time: " + timeRemainingFormat.ToString();
+        float timeRemainingFormat = Mathf.Round(timeRemaining * 1f) / 1f;
+        TimeValue.text = "Time: " + timeRemainingFormat.ToString() + " s";
         if(timeRemaining <= 0){
            WinText.text = "Time is up!";
            NewGame.gameObject.SetActive(true);
@@ -94,6 +96,9 @@ public class BallScript : MonoBehaviour
         if (other.gameObject.CompareTag("PickUps")) 
         {
             other.gameObject.SetActive(false);
+            float x = Random.Range(-4, 4) * 1.0f;
+            float z = Random.Range(-2, 8) * 1.0f;
+            Instantiate(pickupPrefab, new Vector3(x, 0.67f, z), Quaternion.identity);
             count++;
             timeRemaining += 10;
             setCountText();

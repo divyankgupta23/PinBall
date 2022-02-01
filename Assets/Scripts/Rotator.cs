@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Rotator : MonoBehaviour
 {
+    public float delta = 1.5f;
+    public float speed = 2.0f;
+    private Vector3 startPos;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        startPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 v = startPos;
+        v.x += delta * Mathf.Sin(Time.time * speed);
+        transform.position = v;
+        
         transform.Rotate (new Vector3 (15, 30, 45) * Time.deltaTime);
     }
 }
