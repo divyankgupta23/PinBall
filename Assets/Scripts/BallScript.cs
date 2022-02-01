@@ -23,7 +23,7 @@ public class BallScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
-        timeRemaining = 5;
+        timeRemaining = 60;
         NewGame.gameObject.SetActive(false);
         NewGame.onClick.AddListener(startNewGame);
         setCountText();
@@ -63,6 +63,7 @@ public class BallScript : MonoBehaviour
         NewGame.gameObject.SetActive(false);
         WinText.text = "";
         timeRemaining = 10;
+        count = 0;
         Debug.Log("new");
     }
 
