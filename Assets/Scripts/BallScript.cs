@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 
@@ -8,7 +9,10 @@ public class BallScript : MonoBehaviour
 {
     public float speed = 0;
     public TextMeshProUGUI ScoreValue;
-   // public GameObject winTextObject;
+    public TextMeshProUGUI TimeValue;
+    public TextMeshProUGUI WinText;
+    public Button NewGame;
+    public float timeRemaining;
     private Rigidbody rb;
     private int count;
     private float movementX;
@@ -19,8 +23,20 @@ public class BallScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
+        timeRemaining = 5;
+        NewGame.gameObject.SetActive(false);
+        NewGame.onClick.AddListener(startNewGame);
         setCountText();
-       // winTextObject.SetActive(false);
+        WinText.text = "";
+    }
+ 
+    void Update()
+    {
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+            setCountText();
+        }
     }
 
     // private void OnMove(InputValue movementValue)
@@ -33,16 +49,26 @@ public class BallScript : MonoBehaviour
 
     private void setCountText()
     {
-        ScoreValue.text = "Count: "+ count.ToString();
-        if(count >= 13){
-           // winTextObject.SetActive(true);
+        ScoreValue.text = count.ToString();
+        float timeRemainingFormat = Mathf.Round(timeRemaining * 100f) / 100f;
+        TimeValue.text = "Time: " + timeRemainingFormat.ToString();
+        if(timeRemaining <= 0){
+           WinText.text = "Time is up!";
+           NewGame.gameObject.SetActive(true);
         }
+    }
+
+    private void startNewGame()
+    {
+        NewGame.gameObject.SetActive(false);
+        WinText.text = "";
+        timeRemaining = 10;
+        Debug.Log("new");
     }
 
     private void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-
         rb.AddForce(movement * speed);
     }
 
