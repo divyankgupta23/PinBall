@@ -25,7 +25,7 @@ public class BallScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
-        timeRemaining = 6;
+        timeRemaining = 60;
         NewGame.gameObject.SetActive(false);
         NewGame.onClick.AddListener(startNewGame);
         NewBall.onClick.AddListener(resetBall);
@@ -69,14 +69,18 @@ public class BallScript : MonoBehaviour
         NewBall.gameObject.SetActive(true);
         ball.gameObject.SetActive(true);
         WinText.text = "";
-        timeRemaining = 10;
+        timeRemaining = 60;
         count = 0;
+        resetBall();
         Debug.Log("new");
     }
 
     private void resetBall()
     {
-        ball.transform.position = new Vector3(1.8f, 0.5f, 1.12f);
+        ball.transform.position = new Vector3(5.32f, 0.3f, -6.53f);
+        movementX = 0;
+        movementY = 0;
+        speed = 0;
     }
 
     private void FixedUpdate()
@@ -91,6 +95,7 @@ public class BallScript : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             count++;
+            timeRemaining += 10;
             setCountText();
         }
         
