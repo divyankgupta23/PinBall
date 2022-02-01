@@ -77,7 +77,7 @@ public class BallScript : MonoBehaviour
 
     private void resetBall()
     {
-        ball.transform.position = new Vector3(5.32f, 0.3f, -6.53f);
+        ball.transform.position = new Vector3(5.32f, 0.5f, -6.53f);
         movementX = 0;
         movementY = 0;
         speed = 0;
