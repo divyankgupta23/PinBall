@@ -5,8 +5,10 @@ using UnityEngine;
 public class LightController : MonoBehaviour
 {
     public Light light;
+    public Renderer board;
     private float dimValue;
     private bool increase = false;
+    private Color currColor = Color.black;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +31,14 @@ public class LightController : MonoBehaviour
         }
 
         light.intensity = dimValue;
+
+        changeBoardColor();
+    }
+
+    void changeBoardColor() {
+        currColor.r = dimValue;
+        currColor.g = dimValue;
+        currColor.b = dimValue;
+        board.material.color = currColor;
     }
 }

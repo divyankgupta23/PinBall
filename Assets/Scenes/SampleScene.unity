@@ -1403,6 +1403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   light: {fileID: 705507994}
+  board: {fileID: 242641364}
 --- !u!1 &753824711
 GameObject:
   m_ObjectHideFlags: 0
